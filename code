@@ -1,0 +1,19 @@
+from machine import Pin
+from machine import UART
+from time import sleep
+led= Pin(23,Pin.OUT)
+uart = UART(1,115200,tx=17,rx=16,timeout=100)
+while True:
+    while uart.any():
+        data= uart.read()
+        data1=data
+        print(data1.decode().strip())
+        if 'on' in data1:
+            led.on()
+        elif 'off' in data1 :
+            led.off()
+        else:
+            print("Invalid")
+            
+        
+
